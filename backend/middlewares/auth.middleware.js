@@ -1,9 +1,18 @@
+const jwt = require('jsonwebtoken');
+
 function authentication(req,res,next){
-    // This function is a placeholder for authentication logic
-    // It can be used to check if a user is authenticated before accessing certain routes
-    // For example, it could verify a JWT token or check session data
-    console.log("Authentication middleware executed");
-    next();
+    if(req.headers.authorization){
+        const token = req.headers.authorization.split(" ")[1];
+        jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+            if(err){
+                return res.status(401).json({message:"Invalid Token"});
+            }
+            req.userId = decoded.id;
+            next();
+        });
+    }else{
+        res.status(401).send({message:"Unauthorized"});
+    }
 }
 
 module.exports = {authentication};

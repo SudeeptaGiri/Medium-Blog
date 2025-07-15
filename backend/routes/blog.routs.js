@@ -9,7 +9,8 @@ router.use(authentication);
 
 // Define routes for blog operations
 router.post('/blog', blogcontroller.createBlog); // Create a new blog post
-router.get('/blog', blogcontroller.getBlog); // Retrieve one blog post
-router.put('/blog', blogcontroller.updateBlog); //update blog post
+router.get('/blog', blogcontroller.getBlogs); // Retrieve one blog post
+router.put('/blog/:id', blogcontroller.updateBlog); //update blog post
+router.get('/blog/:id', blogcontroller.getBlog); // Retrieve single blog posts
 
 module.exports = router;
