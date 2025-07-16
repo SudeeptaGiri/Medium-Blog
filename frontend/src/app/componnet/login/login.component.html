@@ -1,0 +1,24 @@
+<main class="h-screen bg-gray-100 flex items-center justify-center">
+    <section class="h-screen flex-1/2 flex flex-col items-center justify-center">
+        <article class="flex flex-col items-center justify-center text-center ">
+            <h1 class="w-full text-2xl text-black font-bold ">LOG IN</h1>
+            <p class="w-full text-lg text-gray-400 ">Don't have any account? <a class="underline text-shadow-gray-500" routerLink="/signup">signup</a></p>
+        </article>
+        <form class="mb-8 p-8 flex flex-col items-center justify-center w-3/4">
+            <section class="mb-4 w-full flex flex-col items-center justify-center">
+                <label for="email" class="w-full text-lg text-black font-medium">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email@adress" class="w-full text-lg p-2 text-gray-400 border border-black border-solid rounded-lg">
+            </section>
+            <section class="mb-4 w-full flex flex-col items-center justify-center">
+                <label for="password" class="w-full text-lg text-black font-medium">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" class="w-full text-lg p-2 text-gray-400 border border-black border-solid rounded-lg">
+            </section>
+            <section>
+                <button type="submit" class="bg-black text-white text-lg font-medium p-2 px-48 rounded-lg ">Log    In</button>
+            </section>
+        </form>
+    </section>
+    <section class="md:flex hidden h-screen flex-1/2 items-center justify-center">
+        <img src="https://cdn.dribbble.com/userupload/13534460/file/original-9c1163d9de14b413750c8bb257152c56.png?resize=1504x1128&vertical=center" alt="Blog Image" class="w-full h-full object-cover">
+    </section>
+</main>
