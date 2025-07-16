@@ -4,21 +4,40 @@
             <h1 class="w-full text-2xl text-black font-bold ">SIGN UP</h1>
             <p class="w-full text-lg text-gray-400 ">Already have an account? <a class="underline text-shadow-gray-500" routerLink="/login">login</a></p>
         </article>
-        <form class="mb-8 p-8 flex flex-col items-center justify-center w-3/4">
+        <form class="mb-8 p-8 flex flex-col items-center justify-center w-3/4" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
             <section class="mb-4 w-full flex flex-col items-center justify-center">
                 <label for="name" class="w-full text-lg text-black font-medium">Name</label>
-                <input type="text" id="name" name="name" placeholder="Enter your name" class="w-full text-lg p-2  text-gray-400 border border-black border-solid rounded-lg">
+                <input type="text" id="name" name="name" placeholder="Enter your name" class="w-full text-lg p-2  text-gray-400 border border-black border-solid rounded-lg" formControlName="name">
+                <div *ngIf="signupForm.get('name')?.invalid && signupForm.get('name')?.touched" class="text-red-500 text-sm mt-1">
+                    <div *ngIf="signupForm.get('name')?.errors?.['required']">Name is required.</div>
+                    <div *ngIf="signupForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters long.</div>
+                    <div *ngIf="signupForm.get('name')?.errors?.['maxlength']">Name cannot exceed 50 characters.</div>
+                </div>
             </section>
             <section class="mb-4 w-full flex flex-col items-center justify-center">
                 <label for="email" class="w-full text-lg text-black font-medium">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email@adress" class="w-full text-lg p-2 text-gray-400 border border-black border-solid rounded-lg">
+                <input type="email" id="email" name="email" placeholder="Enter your email@adress" class="w-full text-lg p-2 text-gray-400 border border-black border-solid rounded-lg"
+                formControlName="email">
+                <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="text-red-500 text-sm mt-1">
+                    <div *ngIf="signupForm.get('email')?.errors?.['required']">Email is required.</div>
+                    <div *ngIf="signupForm.get('email')?.errors?.['email']">Invalid email format.</div>
+                </div>
             </section>
             <section class="mb-4 w-full flex flex-col items-center justify-center">
                 <label for="password" class="w-full text-lg text-black font-medium">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" class="w-full text-lg p-2 text-gray-400 border border-black border-solid rounded-lg">
+                <input type="password" id="password" name="password" placeholder="Enter your password" class="w-full text-lg p-2 text-gray-400 border border-black border-solid rounded-lg"
+                formControlName="password">
+                <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="text-red-500 text-sm mt-1">
+                    <div *ngIf="signupForm.get('password')?.errors?.['required']">Password is required.</div>
+                    <div *ngIf="signupForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</div>
+                    <div *ngIf="signupForm.get('password')?.errors?.['maxlength']">Password cannot exceed 50 characters.</div>
+                </div>
             </section>
             <section>
                 <button type="submit" class="bg-black text-white text-lg font-medium p-2 px-48 rounded-lg ">Sign Up</button>
+                <div *ngIf="errorMessage" class="text-red-500 text-sm mt-1">
+                    {{ errorMessage }}
+                </div>
             </section>
         </form>
     </section>

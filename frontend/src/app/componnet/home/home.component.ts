@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 interface Blog {
   title: string;
@@ -16,4 +18,12 @@ interface Blog {
 })
 export class HomeComponent {
   blogs:number[] = [1,2,3,4,5,6,7,8,9,10];
+  constructor(private router:Router, private auth:AuthService) {}
+  onCreate() {
+    this.router.navigate(['/create']);
+  }
+  onLogOut() {
+    this.auth.logOut();
+  }
+
 }

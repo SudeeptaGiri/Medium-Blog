@@ -4,17 +4,29 @@
             <h1 class="w-full text-2xl text-black font-bold ">LOG IN</h1>
             <p class="w-full text-lg text-gray-400 ">Don't have any account? <a class="underline text-shadow-gray-500" routerLink="/signup">signup</a></p>
         </article>
-        <form class="mb-8 p-8 flex flex-col items-center justify-center w-3/4">
+        <form class="mb-8 p-8 flex flex-col items-center justify-center w-3/4" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <section class="mb-4 w-full flex flex-col items-center justify-center">
                 <label for="email" class="w-full text-lg text-black font-medium">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email@adress" class="w-full text-lg p-2 text-gray-400 border border-black border-solid rounded-lg">
+                <input type="email" id="email" name="email" placeholder="Enter your email@adress" class="w-full text-lg p-2 text-gray-400 border border-black border-solid rounded-lg" formControlName="email">
+                <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-red-500 text-sm mt-1">
+                    <div *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</div>
+                    <div *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</div>
+                </div>
             </section>
             <section class="mb-4 w-full flex flex-col items-center justify-center">
                 <label for="password" class="w-full text-lg text-black font-medium">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" class="w-full text-lg p-2 text-gray-400 border border-black border-solid rounded-lg">
+                <input type="password" id="password" name="password" placeholder="Enter your password" class="w-full text-lg p-2 text-gray-400 border border-black border-solid rounded-lg" formControlName="password">
+                <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-red-500 text-sm mt-1">
+                    <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</div>
+                    <div *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</div>
+                </div>
             </section>
             <section>
                 <button type="submit" class="bg-black text-white text-lg font-medium p-2 px-48 rounded-lg ">Log    In</button>
+                <div *ngIf="errorMessage" class="text-red-500 text-sm mt-1">
+                    {{ errorMessage }}
+                </div>
+
             </section>
         </form>
     </section>
