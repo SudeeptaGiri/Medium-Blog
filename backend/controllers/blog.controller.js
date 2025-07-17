@@ -2,7 +2,7 @@ const Blog = require('../models/blogs.model');
 const User = require('../models/user.model');
 
 async function createBlog(req, res) {
-  const { title, content } = req.body;
+  const { title, content, published } = req.body;
   // Validate input
   if (!title || !content ) {
     return res.status(400).send({ message: 'All fields are required' });
@@ -21,7 +21,8 @@ async function createBlog(req, res) {
       title,
       content,
       author,
-      authorId
+      authorId,
+      published
     };
     // Check if the authorId is valid
     const authorExists = await User.findById(authorId);

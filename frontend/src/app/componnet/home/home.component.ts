@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { BlogService } from '../../services/blog.service';
+import Blog from '../../model/blog.model';
 
-interface Blog {
-  title: string;
-  content: string;
-  date: Date;
-  author: string;
-  authorId?: string;
-}
+
 
 @Component({
   selector: 'app-home',
@@ -17,8 +13,20 @@ interface Blog {
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  blogs:number[] = [1,2,3,4,5,6,7,8,9,10];
-  constructor(private router:Router, private auth:AuthService) {}
+  blogs:Blog[] = [];
+  constructor(private router:Router, private auth:AuthService, private blog:BlogService) {}
+
+  ngOnInit(){
+    this.blog.getAllBlogs().subscribe({
+      next: (data:any) => {
+        console.log('Blogs fetched successfully:', data.blogs);
+        this.blogs = data.blogs;
+      },
+      error: (error:any) => {
+        console.error('Error fetching blogs:', error);
+      }
+    })
+  }
   onCreate() {
     this.router.navigate(['/create']);
   }

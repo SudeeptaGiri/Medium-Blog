@@ -6,5 +6,5 @@
     </section>
 </nav>
 <section *ngFor="let blog of blogs" class="w-full h-full flex flex-col justify-center items-start">
-    <app-blog></app-blog>
+    <app-blog [blog]="blog" ></app-blog>
 </section>
